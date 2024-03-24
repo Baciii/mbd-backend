@@ -1,0 +1,38 @@
+# 忽略 node_modules 目录
+node_modules/
+
+# 忽略运行时生成的文件
+npm-debug.log
+yarn-error.log
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# 忽略依赖文件
+package-lock.json
+yarn.lock
+
+# 忽略 VSCode 相关的配置文件
+.vscode/
+
+# 忽略编辑器临时文件
+*.swp
+*~
+*.bak
+
+# 忽略本地配置文件，因为它们可能包含敏感信息
+.env
+
+# 忽略构建生成的文件
+/build
+/dist
+
+# 忽略测试生成的文件
+/coverage
+
+# 忽略编辑器的配置文件
+*.idea/
+
+# 忽略编辑器临时文件
+.DS_Store
