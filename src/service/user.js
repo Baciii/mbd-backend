@@ -69,6 +69,8 @@ export default class UserService {
                 if (user.password === tempPassword) {
                     return {
                         id: user.id,
+                        username: user.username,
+                        type: user.type,
                         token: signToken(
                             {
                                 ...user

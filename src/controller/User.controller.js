@@ -35,7 +35,6 @@ class UserController {
                 ctx.body = apiResult.userNotExists();
             }
         } catch (err) {
-            console.log(123123123);
             ctx.status = 200;
             ctx.body = {
                 code: -1,
@@ -104,7 +103,9 @@ class UserController {
                 ctx.body = apiResult.apiSuccess(
                     {
                         id: res.id,
-                        token: res.token
+                        token: res.token,
+                        username: res.username,
+                        type: res.type
                     },
                     '登录成功'
                 );
