@@ -5,6 +5,7 @@ export default {
     DATABASE: 'mbd'
 };
 
+/** 开发环境数据库配置 */
 export const DATABASE_DEV = {
     HOST: 'localhost',
     USER: 'root',
@@ -12,6 +13,7 @@ export const DATABASE_DEV = {
     DATABASE: 'mbd'
 };
 
+/** 生存环境数据库配置 */
 export const DATABASE_PROD = {
     HOST: '172.17.0.1',
     USER: 'root',

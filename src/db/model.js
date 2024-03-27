@@ -136,7 +136,7 @@ export const Inverview = seq.define(
     }
 );
 
-// seq.sync(); // 同步数据库表
+seq.sync(); // 同步数据库表
 
 /** 强制同步(清库) */
 // seq.sync({

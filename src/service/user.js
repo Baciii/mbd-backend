@@ -64,9 +64,7 @@ export default class UserService {
                 }
             });
             if (user) {
-                const tempPassword = genPassword(password);
-
-                if (user.password === tempPassword) {
+                if (user.password === genPassword(password)) {
                     return {
                         id: user.id,
                         username: user.username,
