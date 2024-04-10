@@ -3,16 +3,22 @@ import { Post } from '../db/model.js';
 
 export default class PostService {
     static async getPost(args) {
-        const { keyword = '' } = args;
+        const { keyword = '', publisher } = args;
 
         try {
+            const whereClause = {
+                [Op.or]: [
+                    { company: { [Op.like]: `%${keyword}%` } },
+                    { post: { [Op.like]: `%${keyword}%` } }
+                ]
+            };
+
+            if (publisher) {
+                whereClause.publisher = publisher;
+            }
+
             const res = await Post.findAll({
-                where: {
-                    [Op.or]: [
-                        { company: { [Op.like]: `%${keyword}%` } },
-                        { post: { [Op.like]: `%${keyword}%` } }
-                    ]
-                }
+                where: whereClause
             });
 
             return res;

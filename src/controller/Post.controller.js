@@ -6,11 +6,12 @@ import { verifyToken } from '../utils/signToken.js';
 class PostController {
     /** 获取岗位列表 支持模糊查询 */
     async getPost(ctx, next) {
-        const { keyword = '' } = ctx.query || ctx.queryString;
+        const { keyword = '', publisher } = ctx.query || ctx.queryString;
 
         try {
             const res = await PostService.getPost({
-                keyword
+                keyword,
+                publisher
             });
 
             ctx.status = 200;
