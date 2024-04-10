@@ -10,7 +10,7 @@
 
 ###### User类型
 
--   0.超级管理员（User、Question、Post、Interview、Knowledge）
--   1.普通管理员（Question、Post、Interview、Knowledge）
--   2.后台展示（Question、Post、Interview、Knowledge）———— readonly
--   3.普通用户（Question、Post、Interview、Knowledge）———— 自发布权限
+-   0.超级管理员（User、Question、Post、Interview、Article）
+-   1.普通管理员（Question、Post、Interview、Article）
+-   2.后台展示（Question、Post、Interview、Article）———— readonly
+-   3.普通用户（Question、Post、Interview、Article）———— 自发布权限
