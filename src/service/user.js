@@ -73,7 +73,7 @@ export default class UserService {
                             {
                                 ...user
                             },
-                            '6h'
+                            '24h'
                         ),
                         result: true
                     };
