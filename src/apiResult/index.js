@@ -109,5 +109,13 @@ export default {
             message: '权限不足',
             result: false
         };
+    },
+
+    dataExists() {
+        return {
+            code: 60001,
+            msg: '数据已存在',
+            result: false
+        };
     }
 };

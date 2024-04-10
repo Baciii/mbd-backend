@@ -1,4 +1,4 @@
-import { Question } from '../db/model.js';
+import { Question, QuestionType } from '../db/model.js';
 import seq from '../db/index.js';
 
 export default class QuestionService {
@@ -66,6 +66,44 @@ export default class QuestionService {
             });
 
             return res;
+        } catch (err) {
+            throw Error(err.errors[0].message);
+        }
+    }
+
+    static async questionTypeList(args) {
+        try {
+            const res = await QuestionType.findAll();
+
+            return res;
+        } catch (err) {
+            throw Error(err.errors[0].message);
+        }
+    }
+
+    static async addQuestionType(args) {
+        const { type } = args;
+
+        try {
+            const exists = await QuestionType.findOne({
+                where: {
+                    type
+                }
+            });
+
+            if (exists) {
+                return {
+                    msg: '类型已存在',
+                    result: false
+                };
+            } else {
+                const res = await QuestionType.create(args);
+
+                return {
+                    data: res,
+                    result: true
+                };
+            }
         } catch (err) {
             throw Error(err.errors[0].message);
         }

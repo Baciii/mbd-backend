@@ -13,7 +13,7 @@ class QuestionController {
             ctx.status = 200;
             ctx.body = {
                 code: -1,
-                message: err.message || '添加失败',
+                message: err.message || '查询失败',
                 result: false
             };
         }
@@ -145,6 +145,51 @@ class QuestionController {
             ctx.body = {
                 code: -1,
                 message: err.message || '题目获取失败',
+                result: false
+            };
+        }
+    }
+
+    /** 题目类型列表 */
+    async questionTypeList(ctx, next) {
+        try {
+            const res = await QuestionService.questionTypeList();
+
+            ctx.status = 200;
+            ctx.body = apiResult.apiSuccess(res);
+        } catch (err) {
+            ctx.status = 200;
+            ctx.body = {
+                code: -1,
+                message: err.message || '查询失败',
+                result: false
+            };
+        }
+    }
+
+    /** 新增题目类型 */
+    async addQuestionType(ctx, next) {
+        const request = ctx.request.body;
+
+        const schema = Joi.object({
+            type: Joi.string().required()
+        });
+
+        try {
+            await schema.validateAsync(request);
+            const res = await QuestionService.addQuestionType(request);
+
+            ctx.status = 200;
+            if (res.result) {
+                ctx.body = apiResult.apiSuccess(res.data);
+            } else {
+                ctx.body = apiResult.dataExists();
+            }
+        } catch (err) {
+            ctx.status = 200;
+            ctx.body = {
+                code: -1,
+                message: err.message || '添加失败',
                 result: false
             };
         }

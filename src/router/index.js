@@ -37,6 +37,8 @@ router.post('/addQuestion', Question.addQuestion);
 router.delete('/deleteQuestion', Question.deleteQuestion);
 router.get('/randomQuestion', Question.randomQuestion);
 router.post('/modifyQuestion', Question.modifyQuestion);
+router.get('/questionTypeList', Question.questionTypeList);
+router.post('/addQuestionType', Question.addQuestionType);
 
 /** Interview */
 router.get('/interviewList', Interview.interviewList);
@@ -44,5 +46,7 @@ router.post('/addInterview', Interview.addInterview);
 router.delete('/deleteInterview', Interview.deleteInterview);
 router.post('/modifyInterview', Interview.modifyInterview);
 router.get('/myInterview', Interview.myInterview);
+
+/** Article */
 
 export default router;

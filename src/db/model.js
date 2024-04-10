@@ -36,6 +36,21 @@ export const Question = seq.define(
     }
 );
 
+export const QuestionType = seq.define(
+    'questionType',
+    {
+        type: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            comment: '题目类型'
+        }
+    },
+    {
+        freezeTableName: true,
+        timestamps: false
+    }
+);
+
 export const Post = seq.define(
     'post',
     {
