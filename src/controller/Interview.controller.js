@@ -5,8 +5,13 @@ import apiResult from '../apiResult/index.js';
 
 class InterviewController {
     async interviewList(ctx, next) {
+        const { keyword = '', publisher } = ctx.query || ctx.queryString;
+
         try {
-            const res = await InterviewService.interviewList();
+            const res = await InterviewService.interviewList({
+                keyword,
+                publisher
+            });
 
             ctx.status = 200;
             ctx.body = apiResult.apiSuccess(res);

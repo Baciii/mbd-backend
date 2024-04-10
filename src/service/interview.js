@@ -3,8 +3,23 @@ import { Inverview } from '../db/model.js';
 
 export default class InterviewService {
     static async interviewList(args) {
+        const { keyword = '', publisher } = args;
+
         try {
-            const res = await Inverview.findAll();
+            const whereClause = {
+                [Op.or]: [
+                    { company: { [Op.like]: `%${keyword}%` } },
+                    { post: { [Op.like]: `%${keyword}%` } }
+                ]
+            };
+
+            if (publisher) {
+                whereClause.publisher = publisher;
+            }
+
+            const res = await Inverview.findAll({
+                where: whereClause
+            });
 
             return res;
         } catch (err) {
