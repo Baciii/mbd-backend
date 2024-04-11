@@ -2,10 +2,12 @@ import Joi from 'joi';
 
 import InterviewService from '../service/interview.js';
 import apiResult from '../apiResult/index.js';
+import { verifyToken } from '../utils/signToken.js';
 
 class InterviewController {
     async interviewList(ctx, next) {
         const { keyword = '', publisher } = ctx.query || ctx.queryString;
+        console.log(ctx.header);
 
         try {
             const res = await InterviewService.interviewList({
@@ -116,15 +118,16 @@ class InterviewController {
     }
 
     async myInterview(ctx, next) {
-        const request = ctx.query || ctx.queryString;
-
-        const schema = Joi.object({
-            id: Joi.alternatives().try(Joi.string(), Joi.number()).required() // string or number
-        });
-
         try {
-            await schema.validateAsync(request);
-            const res = await InterviewService.myInterview(request);
+            const userInfo = await verifyToken(
+                ctx.header['authorization'].slice(7)
+            );
+
+            const { id } = userInfo.dataValues;
+
+            const res = await InterviewService.myInterview({
+                id
+            });
 
             ctx.status = 200;
             if (res) {

@@ -119,16 +119,16 @@ class PostController {
 
     /** 我发布的岗位 */
     async myPost(ctx, next) {
-        const request = ctx.query || ctx.queryString;
-        const tokenInfo = await verifyToken(ctx.headers.authorization.slice(7));
-
-        const schema = Joi.object({
-            id: Joi.alternatives().try(Joi.string(), Joi.number()).required() // string or number
-        });
-
         try {
-            await schema.validateAsync(request);
-            const res = await PostService.myPost(request);
+            const userInfo = await verifyToken(
+                ctx.header['authorization'].slice(7)
+            );
+
+            const { id } = userInfo.dataValues;
+
+            const res = await PostService.myPost({
+                id
+            });
 
             ctx.status = 200;
             ctx.body = apiResult.apiSuccess(res);

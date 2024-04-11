@@ -84,10 +84,11 @@ export default class InterviewService {
 
     static async myInterview(args) {
         const { id } = args;
+
         try {
             const res = await Inverview.findAll({
                 where: {
-                    id
+                    publisher: id
                 }
             });
 
