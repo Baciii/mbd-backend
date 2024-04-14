@@ -60,5 +60,6 @@ router.delete('/deleteArticle', Article.deleteArticle);
 router.post('/collectArticle', Article.collectArticle);
 router.get('/collectedArticle', Article.collectedArticle);
 router.post('/cancelCollectArticle', Article.cancelCollectArticle);
+router.get('/isCollectedArticle', Article.isCollectedArticle);
 
 export default router;

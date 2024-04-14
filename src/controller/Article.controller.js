@@ -226,6 +226,40 @@ class ArticleController {
             };
         }
     }
+
+    async isCollectedArticle(ctx, next) {
+        try {
+            const request = ctx.query || ctx.queryString;
+
+            const schema = Joi.object({
+                article_id: Joi.alternatives()
+                    .try(Joi.string(), Joi.number())
+                    .required()
+            });
+
+            const userInfo = await verifyToken(
+                ctx.header['authorization'].slice(7)
+            );
+
+            const { id } = userInfo.dataValues;
+
+            await schema.validateAsync(request);
+            const res = await ArticleService.isCollectedArticle({
+                article_id: request.article_id,
+                user_id: id
+            });
+
+            ctx.status = 200;
+            ctx.body = apiResult.apiSuccess(res);
+        } catch (err) {
+            ctx.status = 200;
+            ctx.body = {
+                code: -1,
+                message: err.message || '系统错误',
+                result: false
+            };
+        }
+    }
 }
 
 export default new ArticleController();
