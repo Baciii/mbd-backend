@@ -151,7 +151,76 @@ export const Inverview = seq.define(
     }
 );
 
-seq.sync(); // 同步数据库表
+export const UserFavoriteArticle = seq.define(
+    'user_favorite_article',
+    {
+        user_id: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            comment: '用户ID'
+        },
+        article_id: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            comment: '文章ID'
+        }
+    },
+    {
+        freezeTableName: true,
+        timestamps: false
+    }
+);
+
+export const UserFavoriteQuestion = seq.define(
+    'user_favorite_question',
+    {
+        user_id: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            comment: '用户ID'
+        },
+        question_id: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            comment: '文章ID'
+        }
+    },
+    {
+        freezeTableName: true,
+        timestamps: false
+    }
+);
+
+export const Article = seq.define(
+    'article',
+    {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        tag: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            comment: '文章标签'
+        },
+        content: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+            comment: '文章内容'
+        },
+        publisher: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            comment: '发布人'
+        }
+    },
+    {
+        freezeTableName: true,
+        timestamps: false
+    }
+);
+
+// seq.sync(); // 同步数据库表
 
 /** 强制同步(清库) */
 // seq.sync({
