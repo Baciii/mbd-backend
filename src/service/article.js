@@ -97,6 +97,12 @@ export default class ArticleService {
                     }
                 });
 
+                await UserFavoriteArticle.destroy({
+                    where: {
+                        article_id
+                    }
+                });
+
                 return {
                     data: res,
                     result: true
@@ -118,8 +124,10 @@ export default class ArticleService {
 
         try {
             const item = await UserFavoriteArticle.findOne({
-                user_id,
-                article_id
+                where: {
+                    user_id,
+                    article_id
+                }
             });
 
             if (!item) {
