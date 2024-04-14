@@ -4,6 +4,7 @@ import User from '../controller/User.controller.js';
 import Post from '../controller/Post.controller.js';
 import Question from '../controller/Question.controller.js';
 import Interview from '../controller/Interview.controller.js';
+import Article from '../controller/Article.controller.js';
 
 const router = new Router({
     prefix: '/api'
@@ -39,6 +40,9 @@ router.get('/randomQuestion', Question.randomQuestion);
 router.post('/modifyQuestion', Question.modifyQuestion);
 router.get('/questionTypeList', Question.questionTypeList);
 router.post('/addQuestionType', Question.addQuestionType);
+router.post('/collectQuestion', Question.collectQuestion);
+router.get('/collectedQuestion', Question.collectedQuestion);
+router.post('/cancelCollectQuestion', Question.cancelCollectQuestion);
 
 /** Interview */
 router.get('/interviewList', Interview.interviewList);
@@ -48,5 +52,12 @@ router.post('/modifyInterview', Interview.modifyInterview);
 router.get('/myInterview', Interview.myInterview);
 
 /** Article */
+router.get('/articleList', Article.articleList);
+router.post('/addArticle', Article.addArticle);
+router.post('/modifyArticle', Article.modifyArticle);
+router.delete('/deleteArticle', Article.deleteArticle);
+router.post('/collectArticle', Article.collectArticle);
+router.get('/collectedArticle', Article.collectedArticle);
+router.post('/cancelCollectArticle', Article.cancelCollectArticle);
 
 export default router;
