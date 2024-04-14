@@ -213,4 +213,25 @@ export default class QuestionService {
             throw Error(err.errors[0].message);
         }
     }
+
+    static async isCollectedQuestion(args) {
+        try {
+            const { question_id, user_id } = args;
+
+            const item = await UserFavoriteQuestion.findOne({
+                where: {
+                    question_id,
+                    user_id
+                }
+            });
+
+            if (item) {
+                return true;
+            }
+
+            return false;
+        } catch (err) {
+            throw Error(err.errors[0].message);
+        }
+    }
 }

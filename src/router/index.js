@@ -43,6 +43,7 @@ router.post('/addQuestionType', Question.addQuestionType);
 router.post('/collectQuestion', Question.collectQuestion);
 router.get('/collectedQuestion', Question.collectedQuestion);
 router.post('/cancelCollectQuestion', Question.cancelCollectQuestion);
+router.get('/isCollectedQuestion', Question.isCollectedQuestion);
 
 /** Interview */
 router.get('/interviewList', Interview.interviewList);
