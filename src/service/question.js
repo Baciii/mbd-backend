@@ -31,6 +31,12 @@ export default class QuestionService {
                 where: args
             });
 
+            await UserFavoriteQuestion.destroy({
+                where: {
+                    question_id: args.id
+                }
+            });
+
             return res;
         } catch (err) {
             throw Error(err.errors[0].message);
@@ -117,8 +123,10 @@ export default class QuestionService {
 
         try {
             const item = await UserFavoriteQuestion.findOne({
-                user_id,
-                question_id
+                where: {
+                    user_id,
+                    question_id
+                }
             });
 
             if (!item) {
