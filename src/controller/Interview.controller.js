@@ -7,7 +7,6 @@ import { verifyToken } from '../utils/signToken.js';
 class InterviewController {
     async interviewList(ctx, next) {
         const { keyword = '', publisher } = ctx.query || ctx.queryString;
-        console.log(ctx.header);
 
         try {
             const res = await InterviewService.interviewList({
@@ -21,7 +20,7 @@ class InterviewController {
             ctx.status = 200;
             ctx.body = {
                 code: -1,
-                message: err.message || '添加失败',
+                message: err.message || '查询失败',
                 result: false
             };
         }
