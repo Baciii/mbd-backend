@@ -1,5 +1,8 @@
-import { Question, QuestionType } from '../db/model.js';
+import { Op } from 'sequelize';
+import { Question, QuestionType, UserFavoriteQuestion } from '../db/model.js';
 import seq from '../db/index.js';
+
+import { PERMISSION, controll } from '../utils/permissionControl.js';
 
 export default class QuestionService {
     static async questionList(args) {
@@ -102,6 +105,108 @@ export default class QuestionService {
                 return {
                     data: res,
                     result: true
+                };
+            }
+        } catch (err) {
+            throw Error(err.errors[0].message);
+        }
+    }
+
+    static async collectQuestion(args) {
+        const { user_id, question_id } = args;
+
+        try {
+            const item = await UserFavoriteQuestion.findOne({
+                user_id,
+                question_id
+            });
+
+            if (!item) {
+                const res = await UserFavoriteQuestion.create({
+                    user_id,
+                    question_id
+                });
+
+                return res;
+            }
+            return true;
+        } catch (err) {
+            throw Error(err.errors[0].message);
+        }
+    }
+
+    static async collectedQuestion(args) {
+        const { user_id } = args;
+
+        try {
+            const temp = await UserFavoriteQuestion.findAll({
+                where: {
+                    user_id
+                }
+            });
+
+            const questionIDList = temp.map((item) => item.question_id);
+
+            if (questionIDList.length) {
+                const res = await Question.findAll({
+                    where: {
+                        id: {
+                            [Op.or]: questionIDList
+                        }
+                    }
+                });
+
+                return res || [];
+            } else {
+                return [];
+            }
+        } catch (err) {
+            throw Error(err.errors[0].message);
+        }
+    }
+
+    static async cancelCollectQuestion(args) {
+        try {
+            const { question_id, user_id, user_type } = args;
+            const item = await UserFavoriteQuestion.findOne({
+                where: {
+                    question_id,
+                    user_id
+                }
+            });
+
+            if (!item) {
+                return {
+                    type: 0,
+                    message: '资源不存在',
+                    result: false
+                };
+            }
+
+            const result = controll(
+                PERMISSION.ADMIN,
+                user_type,
+                user_id,
+                item.user_id
+            );
+
+            if (result) {
+                const res = await UserFavoriteQuestion.destroy({
+                    where: {
+                        question_id,
+                        user_id
+                    }
+                });
+
+                return {
+                    data: res,
+                    result: true
+                };
+            } else {
+                return {
+                    type: 1,
+                    message: '权限不足',
+                    result: false
                 };
             }
         } catch (err) {
