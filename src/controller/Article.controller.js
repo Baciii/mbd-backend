@@ -31,7 +31,7 @@ class ArticleController {
 
         const schema = Joi.object({
             title: Joi.string().required(),
-            tag: Joi.string().required(),
+            tag: Joi.array(),
             content: Joi.string().required(),
             publisher: Joi.alternatives()
                 .try(Joi.string(), Joi.number())
@@ -40,7 +40,11 @@ class ArticleController {
 
         try {
             await schema.validateAsync(request);
-            const res = await ArticleService.addArticle(request);
+            const res = await ArticleService.addArticle(
+                Object.assign({}, request, {
+                    tag: JSON.stringify(request.tag)
+                })
+            );
 
             ctx.status = 200;
             ctx.body = apiResult.apiSuccess(res);
@@ -60,7 +64,7 @@ class ArticleController {
         const schema = Joi.object({
             id: Joi.alternatives().try(Joi.string(), Joi.number()).required(),
             title: Joi.string().required(),
-            tag: Joi.string().required(),
+            tag: Joi.array(),
             content: Joi.string().required(),
             publisher: Joi.alternatives()
                 .try(Joi.string(), Joi.number())
@@ -69,7 +73,12 @@ class ArticleController {
 
         try {
             await schema.validateAsync(request);
-            const res = await ArticleService.modifyArticle(request);
+            const res = await ArticleService.modifyArticle(
+                Object.assign({}, request, {
+                    options: JSON.stringify(request.options),
+                    tag: JSON.stringify(request.tag)
+                })
+            );
 
             ctx.status = 200;
             ctx.body = apiResult.apiSuccess(res);

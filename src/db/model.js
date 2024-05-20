@@ -80,7 +80,7 @@ export const Post = seq.define(
             comment: '描述'
         },
         publisher: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             comment: '发布人'
         }
@@ -140,7 +140,7 @@ export const Inverview = seq.define(
             comment: '是否公开'
         },
         publisher: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             comment: '发布人'
         }
@@ -155,12 +155,12 @@ export const UserFavoriteArticle = seq.define(
     'user_favorite_article',
     {
         user_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             comment: '用户ID'
         },
         article_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             comment: '文章ID'
         }
@@ -175,12 +175,12 @@ export const UserFavoriteQuestion = seq.define(
     'user_favorite_question',
     {
         user_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             comment: '用户ID'
         },
         question_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             comment: '文章ID'
         }
@@ -209,7 +209,7 @@ export const Article = seq.define(
             comment: '文章内容'
         },
         publisher: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             comment: '发布人'
         }
@@ -220,9 +220,9 @@ export const Article = seq.define(
     }
 );
 
-// seq.sync(); // 同步数据库表
+seq.sync(); // 同步数据库表
 
 /** 强制同步(清库) */
 // seq.sync({
 //     force: true
-// })
+// });

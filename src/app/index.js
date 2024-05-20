@@ -32,7 +32,7 @@ app.use(function (ctx, next) {
 /** 除 /api/user 开头的路由不需要 token 鉴权 */
 app.use(
     jwt({ secret }).unless({
-        path: [/^\/api\/user\/login/, /^\/api\/user\/register/]
+        path: [/^\/api\/user\/login/, /^\/api\/user\/register/, /^\/api\/test/]
     })
 );
 app.use(bodyParser());

@@ -152,4 +152,6 @@ export default class UserService {
             throw Error(err.errors[0].message);
         }
     }
+
+    static async feedback(args) {}
 }

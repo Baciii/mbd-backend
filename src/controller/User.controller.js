@@ -147,6 +147,7 @@ class UserController {
             };
         }
     }
+
     async deleteUser(ctx, next) {
         const request = ctx.request.body;
 
@@ -170,6 +171,8 @@ class UserController {
             };
         }
     }
+
+    async feedback(ctx, next) {}
 }
 
 export default new UserController();

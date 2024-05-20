@@ -18,12 +18,21 @@ router.get('/', (ctx, next) => {
     };
 });
 
+router.get('/test', (ctx, next) => {
+    ctx.body = {
+        code: 0,
+        msg: 'success',
+        data: []
+    };
+});
+
 /** User */
 router.get('/user/userList', User.userList);
 router.post('/user/register', User.register);
 router.post('/user/login', User.login);
 router.post('/user/modify', User.modify);
 router.delete('/user/deleteUser', User.deleteUser);
+// router.post('/user/feedback', User.feedback);
 
 /** Post */
 router.get('/getPost', Post.getPost);

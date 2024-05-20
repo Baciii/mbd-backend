@@ -15,7 +15,7 @@ export const DATABASE_DEV = {
 
 /** 生存环境数据库配置 */
 export const DATABASE_PROD = {
-    HOST: '172.17.0.1',
+    HOST: 'localhost',
     USER: 'root',
     PASSWORD: 'Baci949..',
     DATABASE: 'mbd'
